@@ -24,6 +24,20 @@ Route::prefix('admin')->group(function () {
         Route::get('{site}', 'Admin\SiteController@edit')->name('admin.sites.edit');
         Route::put('{site}', 'Admin\SiteController@update')->name('admin.sites.update');
     });
+
+    Route::prefix('languages')->group(function () {
+        Route::get('/', 'Admin\LanguageController@index')->name('admin.languages.index');
+
+        Route::get('create', 'Admin\LanguageController@create')->name('admin.languages.create');
+        Route::post('/', 'Admin\LanguageController@store')->name('admin.languages.store');
+        Route::delete('/', 'Admin\LanguageController@destroy')->name('admin.languages.destroy');
+
+        Route::get('{language}', 'Admin\LanguageController@edit')->name('admin.languages.edit');
+        Route::put('{language}', 'Admin\LanguageController@update')->name('admin.languages.update');
+
+        Route::get('{language}/order', 'Admin\LanguageController@order')->name('admin.languages.order');
+    });
+
 });
 
 
