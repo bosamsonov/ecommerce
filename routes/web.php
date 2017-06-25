@@ -11,6 +11,23 @@
 |
 */
 
+//Route::resource('sites', 'Admin\SiteController');
+//
+Route::prefix('admin')->group(function () {
+    Route::prefix('sites')->group(function () {
+        Route::get('/', 'Admin\SiteController@index')->name('admin.sites.index');
+
+        Route::get('create', 'Admin\SiteController@create')->name('admin.sites.create');
+        Route::post('/', 'Admin\SiteController@store')->name('admin.sites.store');
+        Route::delete('/', 'Admin\SiteController@destroy')->name('admin.sites.destroy');
+
+        Route::get('{site}', 'Admin\SiteController@edit')->name('admin.sites.edit');
+        Route::put('{site}', 'Admin\SiteController@update')->name('admin.sites.update');
+    });
+});
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
