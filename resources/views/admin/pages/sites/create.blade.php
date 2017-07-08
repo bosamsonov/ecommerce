@@ -32,11 +32,31 @@
             </div>
         </div>
         <div class="form-group row">
-            {!! Form::label('url', 'URL', [
+            {!! Form::label('language_name', 'Language Name', [
                 'class'=>'col-2 col-form-label'
             ]) !!}
             <div class="col-10">
-                {!! Form::text('url', null, [
+                {!! Form::text('language_name', null, [
+                    'class'=> 'form-control'
+                ]) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('language_code', 'Language Code', [
+                'class'=>'col-2 col-form-label'
+            ]) !!}
+            <div class="col-10">
+                {!! Form::text('language_code', null, [
+                    'class'=> 'form-control'
+                ]) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('host', 'Host', [
+                'class'=>'col-2 col-form-label'
+            ]) !!}
+            <div class="col-10">
+                {!! Form::text('host', null, [
                     'class'=> 'form-control'
                 ]) !!}
             </div>

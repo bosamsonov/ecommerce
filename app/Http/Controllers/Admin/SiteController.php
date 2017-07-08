@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Site;
+use App\Models\{
+    Site,
+    SiteTranslation
+};
+use DB;
 
 class SiteController extends Controller
 {
@@ -13,8 +17,9 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request->get('siteData'));
         $sites = Site::all();
         return view('admin.pages.sites.index', [
             'sites'=>$sites
@@ -41,11 +46,32 @@ class SiteController extends Controller
     {
         $this->validate($request, [
             'name' => 'bail|required|unique:sites',
-            'url' => 'required|unique:sites',
+            'language_name' => 'required',
+            'language_code' => 'required',
+            'host' => 'required'
         ]);
+        
+        DB::transaction(function () use ($request) {
+            try {
+                Site::create($request->all())
+                    ->translations()->save(
+                        new SiteTranslation(array_merge(
+                            $request->all(), [
+                                'is_default'=>true,
+                                'language_type'=>'host',
+                                'sort_order'=>0,
+                                'is_enabled'=>true
+                            ])
+                        )
+                    );
+                } catch (\Exception $e) {
+                        DB::rollback();
 
-        Site::create($request->all());
-
+                     return redirect()->back()
+                      ->withErrors(['error' => $e->getMessage()]);
+                }
+        });
+        
         return redirect(route('admin.sites.index'));
 
     }
@@ -75,7 +101,6 @@ class SiteController extends Controller
     {
         $this->validate($request, [
             'name' => 'bail|required|unique:sites,name,'.$site->id,
-            'url' => 'required|unique:sites,url,'.$site->id,
         ]);
 
         $site->update($request->all());

@@ -18,7 +18,6 @@
             <h1>Sites</h1>
     </div>
 
-
     {!! Form::open([
         'route' => 'admin.sites.destroy',
         'method' => 'delete',
@@ -34,9 +33,6 @@
                         Name
                     </th>
                     <th>
-                        URL
-                    </th>
-                    <th>
                         Action
                     </th>
                 </tr>
@@ -49,9 +45,6 @@
                         </td>
                         <td>
                             {{$site->name}}
-                        </td>
-                        <td>
-                            {{$site->url}}
                         </td>
                         <td>
                             <a href="{!! URL::route('admin.sites.edit', $site->id)!!}"

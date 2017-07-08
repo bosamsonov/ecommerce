@@ -4,6 +4,8 @@
     </button>
     {{--<a class="navbar-brand" href="#">Navbar</a>--}}
 
+  <a class="navbar-brand" href="#">Navbar</a>
+
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {!! (Request::url()==URL::route('admin.sites.index'))?'active':'' !!}">

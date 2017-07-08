@@ -50,14 +50,15 @@
                         <button type="submit"
                                 class="btn btn-primary"
                         >
+                            <!--<i class="fa fa-floppy-o" aria-hidden="true"></i>-->
                             Save
                         </button>
                     {!! Form::close() !!} 
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="languages">
-                    <div class="mb-4">
+                    <div>
                         <div class="float-lg-right">
-                            <a href="{!! URL::route('admin.sites.translation.create', $site)!!}"
+                            <a href="{!! URL::route('admin.sites.create')!!}"
                                class="btn btn-primary">
                                 Add language
                             </a>
@@ -65,7 +66,7 @@
                         <h2 class="h2 hidden-md-down">Languages</h2>
                     </div>
                     {!! Form::open([
-                        'route' => ['admin.sites.translation.destroy', $site->id],
+                        'route' => 'admin.sites.destroy',
                         'method' => 'delete',
                         'id'=>'form-sites'
                     ]) !!}
@@ -99,9 +100,7 @@
                                 @foreach($site->translations as $siteTranslation)
                                     <tr>
                                         <td>
-                                            @if (!$siteTranslation->is_default)
-                                                {!! Form::checkbox('selected[]', $siteTranslation->id, false) !!}
-                                            @endif
+                                            {!! Form::checkbox('selected[]', $siteTranslation->id, false) !!}
                                         </td>
                                         <td>
                                             {{$siteTranslation->language_name}}
@@ -150,11 +149,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                               <button type="submit"
-                                class="btn btn-danger"
-                        >
-                            Delete
-                        </button>
+                        
+                  
+                        
                     {!! Form::close() !!}
                      
                  </div>
