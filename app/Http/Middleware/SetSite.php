@@ -69,30 +69,35 @@ class SetSite
                         ])->get();
                     
                 if($language->isEmpty()) {
-                    //language doesn't exist let's use default
+                    //language doesn't exist - it is a default site's page. use default
                     $siteData = SiteTranslation::where([
                         ['host', '=', $host],
                         ['is_default','=',true]
-                    ])->first();
+                    ])->first()->toArray();
                     
-                    // dd($siteData->toArray());
-                    
-                    // dd('default host. no lang on existing domain - using default');
-                    
-                    
-                    
+                    $request->attributes->add([
+                            'siteData' => $siteData
+                        ]);
+
                 } else {
-                    //language exists let's set up site data
+                    //language exists let's set up site data and replace path
+                    $request->attributes->add([
+                            'siteData' => $language->toArray()
+                        ]);
+
+                    $path = ltrim($dupRequest->path(), $selectedLang);
+
+                    $request->server->set('REQUEST_URI', $path);                    
                 }
                 
             } else {
                 //it is a host language, let's set up site data
+                $request->attributes->add([
+                            'siteData' => $host_language->first()->toArray()
+                        ]);
             }
 
-
- 
         }
-        // dd($host);
         
         return $next($request);
     }
