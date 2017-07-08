@@ -35,7 +35,12 @@ class SiteTranslationController extends Controller
             'is_enabled' => 'boolean|required_if:is_default,1',
             'language_name'=>'required|unique_with:site_translations,site_id,language_name',
             'language_code'=>'required|unique_with:site_translations,site_id,language_code',
-            'host'=>'required_if:language_type,host,is_default,1',
+            'host' => [
+                    'required_if:language_type,host,is_default,1',
+                    Rule::unique('site_translations')->where(function($query) use ($site){
+                        $query->whereNotIn('site_id', [$site->id]);
+                    })
+                ],
             'language_type'=>Rule::in(['path','subdomain','host']),
         ]);
         

@@ -48,7 +48,7 @@ class SiteController extends Controller
             'name' => 'bail|required|unique:sites',
             'language_name' => 'required',
             'language_code' => 'required',
-            'host' => 'required'
+            'host' => 'required|unique:site_translations'
         ]);
         
         DB::transaction(function () use ($request) {
