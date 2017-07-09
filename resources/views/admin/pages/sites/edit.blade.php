@@ -140,11 +140,10 @@
                                             </a>
                                         </td>
                                                                                 <td>
-                                            <!--<a href="{!! URL::route('admin.sites.edit', $site->id)!!}"-->
-                                            <!--    class="btn btn-primary">-->
-                                            <!--    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>-->
-                                            <!--</a>-->
-                                            <!--{{--{!! link_to_route('admin.sites.edit', 'Edit', $site->id) !!}--}}-->
+                                            <a href="{!! URL::route('admin.sites.translation.edit', [$site->id, $siteTranslation->id])!!}"
+                                                class="btn btn-primary">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

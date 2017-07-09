@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function () {
         
         
         Route::get('{site}/translation/{siteTranslation}', 'Admin\SiteTranslationController@edit')->name('admin.sites.translation.edit');
-        Route::put('site}/translation/{siteTranslation}', 'Admin\SiteTranslationController@update')->name('admin.sites.translation.update');
+        Route::put('{site}/translation/{siteTranslation}', 'Admin\SiteTranslationController@update')->name('admin.sites.translation.update');
         
         Route::get('{site}/translation/{siteTranslation}/order', 'Admin\SiteTranslationController@order')->name('admin.sites.translation.order');
     });
