@@ -61,6 +61,16 @@
                 ]) !!}
             </div>
         </div>
+        <div class="form-group row">
+            {!! Form::label('theme', 'Theme', [
+                'class'=>'col-2 col-form-label'
+            ]) !!}
+            <div class="col-10">
+                {!! Form::select('theme', $themes, null, [
+                    'class'=> 'form-control'
+                ]) !!}
+            </div>
+        </div>
     {!! Form::close() !!}
 
 @endsection

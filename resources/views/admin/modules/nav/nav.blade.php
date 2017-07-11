@@ -16,10 +16,10 @@
                     @endif
                 </a>
             </li>
-            <li class="nav-item {!! (Request::url()==URL::route('admin.languages.index'))?'active':'' !!}">
-                <a class="nav-link" href="{!! URL::route('admin.languages.index') !!}">
-                    Languages
-                    @if (Request::url()==URL::route('admin.languages.index'))
+            <li class="nav-item {!! (Request::url()==URL::route('admin.pages.index'))?'active':'' !!}">
+                <a class="nav-link" href="{!! URL::route('admin.pages.index') !!}">
+                    Pages
+                    @if (Request::url()==URL::route('admin.pages.index'))
                         <span class="sr-only">(current)</span>
                     @endif
                 </a>

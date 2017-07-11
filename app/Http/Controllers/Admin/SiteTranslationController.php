@@ -245,5 +245,30 @@ class SiteTranslationController extends Controller
         $v->validate();    
     }
     
+//   public function order(Request $request, Language $language)
+//     {
+//         $sortOrder = $language->sort_order;
+//         switch($request->order) {
+//             case 1:
+//                 $languageAffected = Language::where('sort_order','>',$language->sort_order)->ordered()->last();
+//                 break;
+//             case -1:
+//                 $languageAffected = Language::where('sort_order', '<', $language->sort_order)->ordered()->first();
+//                 break;
+//             default:
+//                 return redirect(route('admin.languages.index'));
+//         }
+
+//         $language->update([
+//             'sort_order'=>$languageAffected->sort_order
+//         ]);
+
+//         $languageAffected->update([
+//             'sort_order'=>$sortOrder
+//         ]);
+
+//         return redirect(route('admin.languages.index'));
+//     }
+    
     
 }

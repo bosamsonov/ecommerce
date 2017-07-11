@@ -35,19 +35,27 @@ Route::prefix('admin')->group(function () {
         
         Route::get('{site}/translation/{siteTranslation}/order', 'Admin\SiteTranslationController@order')->name('admin.sites.translation.order');
     });
-
-    Route::prefix('languages')->group(function () {
-        Route::get('/', 'Admin\LanguageController@index')->name('admin.languages.index');
-
-        Route::get('create', 'Admin\LanguageController@create')->name('admin.languages.create');
-        Route::post('/', 'Admin\LanguageController@store')->name('admin.languages.store');
-        Route::delete('/', 'Admin\LanguageController@destroy')->name('admin.languages.destroy');
-
-        Route::get('{language}', 'Admin\LanguageController@edit')->name('admin.languages.edit');
-        Route::put('{language}', 'Admin\LanguageController@update')->name('admin.languages.update');
-
-        Route::get('{language}/order', 'Admin\LanguageController@order')->name('admin.languages.order');
+    
+    Route::prefix('pages')->group(function () {
+         Route::get('/', 'Admin\PageController@index')->name('admin.pages.index');
+         
+         Route::get('{site}/create', 'Admin\PageController@create')->name('admin.pages.create');
+         Route::post('{site}', 'Admin\PageController@store')->name('admin.pages.store');
+         
+         Route::delete('/', 'Admin\PageController@destroy')->name('admin.pages.destroy');
+  
     });
+
+    // Route::prefix('languages')->group(function () {
+    //     Route::get('/', 'Admin\LanguageController@index')->name('admin.languages.index');
+
+    //     Route::get('create', 'Admin\LanguageController@create')->name('admin.languages.create');
+    //     Route::post('/', 'Admin\LanguageController@store')->name('admin.languages.store');
+    //     Route::delete('/', 'Admin\LanguageController@destroy')->name('admin.languages.destroy');
+
+    //     Route::get('{language}', 'Admin\LanguageController@edit')->name('admin.languages.edit');
+    //     Route::put('{language}', 'Admin\LanguageController@update')->name('admin.languages.update');
+    // });
 
 });
 

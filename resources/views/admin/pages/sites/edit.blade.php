@@ -47,6 +47,16 @@
                                 ]) !!}
                             </div>
                         </div>
+                        <div class="form-group row">
+                            {!! Form::label('theme', 'Theme', [
+                                'class'=>'col-2 col-form-label'
+                            ]) !!}
+                            <div class="col-10">
+                                {!! Form::select('theme', $themes, $site->theme, [
+                                    'class'=> 'form-control'
+                                ]) !!}
+                            </div>
+                        </div>
                         <button type="submit"
                                 class="btn btn-primary"
                         >
@@ -128,12 +138,12 @@
                                             @endif
                                         </td>
                                         <td class="text-nowrap">
-                                            <a href="{!! URL::route('admin.languages.order', [$siteTranslation, 'order=1']) !!}"
+                                            <a href="{!! URL::route('admin.sites.translation.order', [$siteTranslation, 'order=1']) !!}"
                                                 class="btn btn-primary btn-sm {!! ($loop->first)?'disabled':'' !!}"
                                             >
                                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                             </a>
-                                            <a href="{!! URL::route('admin.languages.order', [$siteTranslation, 'order=-1']) !!}"
+                                            <a href="{!! URL::route('admin.sites.translation.order', [$siteTranslation, 'order=-1']) !!}"
                                                 class="btn btn-primary btn-sm {!! ($loop->last)?'disabled':'' !!}"
                                             >
                                                 <i class="fa fa-arrow-down" aria-hidden="true"></i>

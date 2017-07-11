@@ -8,6 +8,7 @@ use App\Models\{
     Site,
     SiteTranslation
 };
+use Illuminate\Validation\Rule;
 use DB;
 
 class SiteController extends Controller
@@ -19,7 +20,6 @@ class SiteController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->get('siteData'));
         $sites = Site::all();
         return view('admin.pages.sites.index', [
             'sites'=>$sites
@@ -33,9 +33,13 @@ class SiteController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.sites.create');
+        $themes = self::getThemes();
+        $themes = array_combine($themes, $themes);
+        return view('admin.pages.sites.create', [
+                'themes' => $themes
+            ]);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +52,11 @@ class SiteController extends Controller
             'name' => 'bail|required|unique:sites',
             'language_name' => 'required',
             'language_code' => 'required',
-            'host' => 'required|unique:site_translations'
+            'host' => 'required|unique:site_translations',
+            'theme' => [
+                'required',
+                 Rule::in(self::getThemes()),
+                ]
         ]);
         
         DB::transaction(function () use ($request) {
@@ -85,8 +93,11 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
+        $themes = self::getThemes();
+        $themes = array_combine($themes, $themes);
         return view('admin.pages.sites.edit', [
-            'site'=>$site
+            'site' => $site,
+            'themes' => $themes
         ]);
     }
 
@@ -101,6 +112,10 @@ class SiteController extends Controller
     {
         $this->validate($request, [
             'name' => 'bail|required|unique:sites,name,'.$site->id,
+            'theme' => [
+                'required',
+                 Rule::in(self::getThemes()),
+                ]
         ]);
 
         $site->update($request->all());
@@ -119,4 +134,15 @@ class SiteController extends Controller
         if ($request->selected) Site::whereIn('id', $request->selected)->delete();
         return redirect(route('admin.sites.index'));
     }
+    
+    protected static function getThemes() {
+        $path = resource_path().'/views/client';
+        
+        $themes = array_filter(scandir($path), function($item) use ($path) {
+            return $item!='.'&&$item!='..'&&is_dir($path . '/' . $item);
+        });
+        
+        return $themes;
+    }
+
 }
