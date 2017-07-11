@@ -11,7 +11,7 @@ class PageTranslation extends Model
         'title',
         'url',
         'seo_title',
-        'seo_ketwords',
+        'seo_keywords',
         'seo_description',
         'content',
         'is_enabled'

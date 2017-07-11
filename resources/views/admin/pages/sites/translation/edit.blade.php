@@ -85,7 +85,7 @@
                     'class'=>'col-2 col-form-label'
                 ]) !!}
                 <div class="col-10">
-                    {!! Form::checkbox('is_enabled', true, true, [
+                    {!! Form::checkbox('is_enabled', true, null, [
                     ]) !!}
                 </div>
             </div>

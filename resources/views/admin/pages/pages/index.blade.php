@@ -82,12 +82,24 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    Action
+                                                    <a href="{!! URL::route('admin.pages.translation.edit', [$page, $pageTranslation])!!}"
+                                                               class="btn btn-primary">
+                                                                Edit
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @if($site->translations->count() != $page->translations->count())
                                                 <tr>
-                                                    <tr><td></td><td colspan="5">Add translation</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <a href="{!! URL::route('admin.pages.translation.create', $page)!!}"
+                                                               class="btn btn-primary">
+                                                                Add translation
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 </tr>
                                             @endif
                                         @endforeach

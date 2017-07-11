@@ -118,6 +118,12 @@ class SiteTranslationController extends Controller
     
     public function update(Request $request, Site $site, SiteTranslation $siteTranslation)
     {
+       if (is_null($request->is_enabled) && (!$siteTranslation->is_default)){
+            $request->request->add([
+                'is_enabled' => false
+                ]);
+        }
+        
         $siteTranslations = $site->translations();
         
         $defaultSite=($siteTranslation->is_default)?$siteTranslation:$site->translations()->get()->where('is_default', true)->first();

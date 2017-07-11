@@ -130,7 +130,7 @@
                                             @if ($siteTranslation->is_enabled)
                                                 <span class="badge badge-success">Enabled</span>
                                             @else
-                                                <span class="badge badge-warning">Disabled</span>
+                                                <span class="badge badge-danger">Disabled</span>
                                             @endif
                                             
                                             @if ($siteTranslation->is_default)

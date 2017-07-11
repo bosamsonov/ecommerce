@@ -10,4 +10,9 @@ class Page extends Model
     {
         return $this->hasMany(PageTranslation::class);
     }
+    
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 }

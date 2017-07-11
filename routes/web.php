@@ -37,13 +37,18 @@ Route::prefix('admin')->group(function () {
     });
     
     Route::prefix('pages')->group(function () {
-         Route::get('/', 'Admin\PageController@index')->name('admin.pages.index');
-         
-         Route::get('{site}/create', 'Admin\PageController@create')->name('admin.pages.create');
-         Route::post('{site}', 'Admin\PageController@store')->name('admin.pages.store');
-         
-         Route::delete('/', 'Admin\PageController@destroy')->name('admin.pages.destroy');
-  
+        Route::get('/', 'Admin\PageController@index')->name('admin.pages.index');
+        
+        Route::get('{site}/create', 'Admin\PageController@create')->name('admin.pages.create');
+        Route::post('{site}', 'Admin\PageController@store')->name('admin.pages.store');
+        
+        Route::delete('/', 'Admin\PageController@destroy')->name('admin.pages.destroy');
+        
+        Route::get('{page}/translation/create', 'Admin\PageTranslationController@create')->name('admin.pages.translation.create');
+        Route::post('{page}/translation', 'Admin\PageTranslationController@store')->name('admin.pages.translation.store');
+        
+        Route::get('{page}/translation/{pageTranslation}', 'Admin\PageTranslationController@edit')->name('admin.pages.translation.edit');
+        Route::put('{page}/translation/{pageTranslation}', 'Admin\PageTranslationController@update')->name('admin.pages.translation.update');
     });
 
     // Route::prefix('languages')->group(function () {
