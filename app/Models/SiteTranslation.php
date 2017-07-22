@@ -22,4 +22,9 @@ class SiteTranslation extends Model
     {
         return $this->belongsTo(Site::class);
     }
+    
+    public function attributes(){
+         return $this->hasManyThrough(Attribute::class, AttributeTranslation::class);
+    }
+    
 }

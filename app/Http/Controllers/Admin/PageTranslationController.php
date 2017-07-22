@@ -15,6 +15,8 @@ class PageTranslationController extends Controller
 {
     public function create(Page $page)
     {
+        // dd($page->site);
+        // dd(self::getDesigns($page->site));
         $existingSiteTranslationIds = $page->translations->pluck('site_translation_id')->toArray();
         $pageLanguageOptions = $page->site->translations->whereNotIn('id', $existingSiteTranslationIds)->pluck('language_name', 'id');
         return view('admin.pages.pages.translation.create', [
@@ -49,6 +51,9 @@ class PageTranslationController extends Controller
     
     public function update(Request $request, $page, PageTranslation $pageTranslation)
     {
+        
+        $request->request->add(['site_translation_id'=> $pageTranslation->site_translation_id]);
+        
         if (is_null($request->is_enabled)){
             $request->request->add([
                 'is_enabled' => false
@@ -63,6 +68,20 @@ class PageTranslationController extends Controller
                 'title', 'url', 'seo_title', 'seo_keywords', 'seo_description', 'content', 'is_enabled',
             ]));
         return redirect()->route('admin.pages.index');
+    }
+    
+    protected static function getDesigns($site)
+    {
+        $theme = $site->theme;
+        $path = resource_path().'/views/client/'.$theme.'/pages';
+        
+        $themes = array_filter(scandir($path), function($item) use ($path) {
+            return $item!='.'&&$item!='..';
+        });
+        dd($themes);
+        
+        
+        
     }
 
 }

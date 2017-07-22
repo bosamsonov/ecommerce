@@ -21,4 +21,12 @@ class Site extends Model
         return $this->hasMany(Page::class);
     }
     
+    public function attributeTranslationsOnePerAttribute() {
+        // dd($this->hasManyThrough(AttributeTranslation::class, SiteTranslation::class)->groupBy('attribute_id')->with('attribute')->get()->pluck('attribute')->toArray());
+        return $this->hasManyThrough(AttributeTranslation::class, SiteTranslation::class)
+                ->groupBy('attribute_id')->select('attribute_id');
+        // return $this->hasManyThrough(AttributeTranslation::class, SiteTranslation::class)->groupBy('attribute_id');
+    }
+    
+
 }

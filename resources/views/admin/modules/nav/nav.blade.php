@@ -24,7 +24,31 @@
                     @endif
                 </a>
             </li>
-
+            <li class="nav-item {!! (Request::url()==URL::route('admin.products.index'))?'active':'' !!}">
+                <a class="nav-link" href="{!! URL::route('admin.products.index') !!}">
+                    Products
+                    @if (Request::url()==URL::route('admin.products.index'))
+                        <span class="sr-only">(current)</span>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item {!! (Request::url()==URL::route('admin.attributes.index'))?'active':'' !!}">
+                <a class="nav-link" href="{!! URL::route('admin.attributes.index') !!}">
+                    Attributes
+                    @if (Request::url()==URL::route('admin.attributes.index'))
+                        <span class="sr-only">(current)</span>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item {!! (Request::url()==URL::route('admin.attributes.sets.index'))?'active':'' !!}">
+                <a class="nav-link" href="{!! URL::route('admin.attributes.sets.index') !!}">
+                    Attribute sets
+                    @if (Request::url()==URL::route('admin.attributes.sets.index'))
+                        <span class="sr-only">(current)</span>
+                    @endif
+                </a>
+            </li>
+            
 
         </ul>
     </div>

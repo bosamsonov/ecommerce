@@ -13,6 +13,19 @@
 
 //Route::resource('sites', 'Admin\SiteController');
 //
+Route::prefix('crewing')->group(function(){
+    Route::get('/', 'Crewing\CandidateController@index')->name('crewing.candidates.index');
+    
+    Route::get('create', 'Crewing\CandidateController@create')->name('crewing.candidates.create');
+    
+    Route::post('/', 'Crewing\CandidateController@store')->name('crewing.candidates.store');
+
+    Route::get('{candidate}', 'Crewing\CandidateController@show')->name('crewing.candidates.show');
+    
+    Route::get('{candidate}/edit', 'Crewing\CandidateController@edit')->name('crewing.candidates.edit');
+    
+});
+
 Route::prefix('admin')->group(function () {
     Route::prefix('sites')->group(function () {
         Route::get('/', 'Admin\SiteController@index')->name('admin.sites.index');
@@ -50,22 +63,38 @@ Route::prefix('admin')->group(function () {
         Route::get('{page}/translation/{pageTranslation}', 'Admin\PageTranslationController@edit')->name('admin.pages.translation.edit');
         Route::put('{page}/translation/{pageTranslation}', 'Admin\PageTranslationController@update')->name('admin.pages.translation.update');
     });
+    
+    Route::prefix('products')->group(function () {
+        Route::get('/', 'Admin\ProductController@index')->name('admin.products.index');
+        
+        Route::get('{site}/create', 'Admin\ProductController@create')->name('admin.products.create');
+        Route::post('{site}', 'Admin\ProductController@store')->name('admin.products.store');
+    });
+    
+    Route::prefix('attributes')->group(function () {
+        Route::prefix('sets')->group(function () {
+            Route::get('/', 'Admin\AttributeSetController@index')->name('admin.attributes.sets.index');
 
-    // Route::prefix('languages')->group(function () {
-    //     Route::get('/', 'Admin\LanguageController@index')->name('admin.languages.index');
+            Route::get('{site}/create', 'Admin\AttributeSetController@create')->name('admin.attributes.sets.create');
+            Route::post('{site}', 'Admin\AttributeSetController@store')->name('admin.attributes.sets.store');
 
-    //     Route::get('create', 'Admin\LanguageController@create')->name('admin.languages.create');
-    //     Route::post('/', 'Admin\LanguageController@store')->name('admin.languages.store');
-    //     Route::delete('/', 'Admin\LanguageController@destroy')->name('admin.languages.destroy');
+        });
+        
+        Route::get('/', 'Admin\AttributeController@index')->name('admin.attributes.index');
+        
+        Route::get('{site}/create', 'Admin\AttributeController@create')->name('admin.attributes.create');
+        Route::post('{site}', 'Admin\AttributeController@store')->name('admin.attributes.store');
 
-    //     Route::get('{language}', 'Admin\LanguageController@edit')->name('admin.languages.edit');
-    //     Route::put('{language}', 'Admin\LanguageController@update')->name('admin.languages.update');
-    // });
+        Route::get('{attribute}/edit', 'Admin\AttributeController@edit')->name('admin.attributes.edit');
+        Route::put('{attribute}', 'Admin\AttributeController@update')->name('admin.attributes.update');
+        
+        Route::get('{site}/{attribute}/translation/create', 'Admin\AttributeTranslationController@create')->name('admin.attributes.translation.create');
+        Route::post('{site}/{attribute}/translation', 'Admin\AttributeTranslationController@store')->name('admin.attributes.translation.store');
+
+
+
+    });
 
 });
 
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('{url?}', 'Client\BaseController@reroute')->where('url', '.*');;

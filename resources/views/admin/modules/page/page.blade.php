@@ -18,7 +18,7 @@
 
         <title></title>
     </head>
-    <body>
+    <body onload ="App.init('{{ $controller }}', '{{ $action }}');">
     @include('admin.modules.nav.nav')
     <div class="container">
         @if ($errors->any())
@@ -30,8 +30,8 @@
                 </ul>
             </div>
         @endif
-
-        @yield('content')
+        
+      @yield('content')
 
     </div>
 
@@ -41,5 +41,8 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>    
+    
+    <script src="{{ mix('/js/admin.js') }}"></script>
     </body>
 </html>
